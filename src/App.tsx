@@ -1,10 +1,13 @@
-import { useState } from "react"
+import { useState } from 'react';
 import Cabecalho from "./Components/Cabecalho"
 import NovaTarefa from "./Components/NovaTarefa"
 import TarefasLista from "./Components/TarefasListas"
 
 interface Tarefa {
+  id: number;
   tituloTarefa: string;
+  categoria: string;
+  status: "Pendente" | "Concluída";
 }
 
 function App() {
@@ -23,6 +26,10 @@ function App() {
 
         <div className="p-5">
           < TarefasLista tarefas={tarefas} />
+        </div>
+
+        <div>
+          
         </div>
       </div>
     </div>
