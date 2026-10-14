@@ -5,6 +5,8 @@ interface Tarefa {
   id: number;
   tituloTarefa: string;
   categoria: string;
+  descricao?: string;
+  data?: string;
   status: "Pendente" | "Concluída";
 }
 
@@ -15,6 +17,8 @@ interface NovaTarefaProps {
 const NovaTarefa = ({ setTarefas }: NovaTarefaProps) => {
   const [tituloTarefa, setTituloTarefa] = useState("");
   const [categoria, setCategoria] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [data, setData] = useState("");
 
   function adicionarTarefa() {
     if (!tituloTarefa.trim() || !categoria) {
@@ -26,6 +30,8 @@ const NovaTarefa = ({ setTarefas }: NovaTarefaProps) => {
       id: Date.now(),
       tituloTarefa: tituloTarefa,
       categoria: categoria,
+      descricao: descricao.trim() || undefined,
+      data: data || undefined,
       status: "Pendente",
     };
 
@@ -36,6 +42,8 @@ const NovaTarefa = ({ setTarefas }: NovaTarefaProps) => {
 
     setTituloTarefa("");
     setCategoria("");
+    setDescricao("");
+    setData("")
   }
 
   return (
@@ -75,16 +83,35 @@ const NovaTarefa = ({ setTarefas }: NovaTarefaProps) => {
             <option value="Lazer">Lazer</option>
             <option value="Pessoal">Pessoal</option>
             <option value="Trabalho">Trabalho</option>
+            <option value="Faculdade">Faculdade</option>
           </select>
         </div>
 
-        <button
-          type="button"
-          onClick={adicionarTarefa}
-          className="text-white bg-amber-800 h-10 rounded-lg px-5 cursor-pointer"
-        >
-          + Adicionar tarefa
-        </button>
+      </div>
+
+      <div className="flex gap-4 pt-5 items-end">
+        <div className="flex flex-col w-full">
+          <label htmlFor="">Descrição (opicional)</label>
+          <input value={descricao} onChange={(e) => setDescricao(e.target.value)} type="text" className="border border-[#E2E8F0] rounded-lg h-10 outline-none" />
+        </div>
+
+        <div>
+          <label>Data (opicional) </label>
+          <div className="border border-amber-800 rounded-lg h-10 p-2">
+            <input value={data} onChange={(e) => setData(e.target.value)} type="date" className="text-amber-800" />
+          </div>
+        </div>
+
+        
+       
+            <button
+            type="button"
+            onClick={adicionarTarefa}
+            className="text-white bg-amber-800 h-10 rounded-lg cursor-pointer w-80"
+          >
+            + Adicionar tarefa
+          </button>
+        
       </div>
     </div>
   );
